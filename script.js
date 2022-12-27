@@ -13,19 +13,23 @@ const decimalPointButton  = document.getElementById('decimal-point');
 //get last character of the user input
 let lastChar = outputScreenText.textContent.charAt(outputScreenText.textContent.length-1);
 
+//write to screen numbers/operators
 printToScreenButton.forEach(e => {
     e.addEventListener('click', function () {
         updateScreenText(this.textContent);
     });
 }); 
 
-clearButton.addEventListener('click', function () {
+//clear output text
+clearButton.addEventListener('click', function () { 
     outputScreenText.textContent = '';
-})
+});
 
 function updateScreenText (newChar) {
-    //don't allow user to input 2 non-number items in a row
+    //don't allow user to input 2 non-number items in a  row
     if (!parseInt(lastChar) && !parseInt(newChar)) {
+        return;
+    } else if (!lastChar && !parseInt(newChar)) {
         return;
     }
 
