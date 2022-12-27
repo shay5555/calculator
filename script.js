@@ -10,6 +10,10 @@ const getResultButton     = document.getElementById('get-result');
 const signChangeButton    = document.getElementById('sign-change');
 const decimalPointButton  = document.getElementById('decimal-point');
 
+let firstNum = null;
+let secondNum = null;
+let currentOperator;
+
 //get last character of the user input
 let lastChar = outputScreenText.textContent.charAt(outputScreenText.textContent.length-1);
 
@@ -23,17 +27,35 @@ printToScreenButton.forEach(e => {
 //clear output text
 clearButton.addEventListener('click', function () { 
     outputScreenText.textContent = '';
+    firstNum = null;
+    secondNum = null
 });
 
 function updateScreenText (newChar) {
     //don't allow user to input 2 non-number items in a  row
-    if (!parseInt(lastChar) && !parseInt(newChar)) {
-        return;
-    } else if (!lastChar && !parseInt(newChar)) {
+    if (!parseFloat(lastChar) && !parseFloat(newChar)) {
         return;
     }
 
-    outputScreenText.textContent += `${newChar}`;
+    //executes when clicking an operator
+    if (!parseInt(newChar) && newChar != 0 && newChar != '.') {
+        //executes once after page load or after clearing calculator text
+        if (!firstNum) {
+            firstNum = parseFloat(outputScreenText.textContent.match(/\d+[.]\d+|\d+/));
+            currentOperator = newChar;
+        //executes on second operaor click & onwards
+        } else if (!secondNum) {
+            //get number on the right(second num)
+            secondNum = parseFloat(outputScreenText.textContent.match(/(\d+[.]\d+|\d+)$/));
+            outputScreenText.textContent = operate(firstNum, secondNum, currentOperator);
+            //current text is the result of the last operation, which is the first num of the current one
+            firstNum = parseFloat(outputScreenText.textContent);
+            currentOperator = newChar;
+            secondNum = null;
+        }
+    }
+
+    outputScreenText.textContent += `${newChar}`;   
     lastChar = newChar;
 }
 
