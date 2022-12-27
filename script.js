@@ -31,6 +31,14 @@ clearButton.addEventListener('click', function () {
     secondNum = null
 });
 
+getResultButton.addEventListener('click', function () {
+    firstNum = parseFloat(outputScreenText.textContent.match(/\d+[.]\d+|\d+/));
+    secondNum = parseFloat(outputScreenText.textContent.match(/(\d+[.]\d+|\d+)$/));
+    currentOperator = outputScreenText.textContent.match(/[+\-*/]/)[0];
+    console.log(currentOperator);
+    outputScreenText.textContent = operate(firstNum, secondNum, currentOperator);
+})
+
 function updateScreenText (newChar) {
     //don't allow user to input 2 non-number items in a  row
     if (!parseFloat(lastChar) && !parseFloat(newChar)) {
