@@ -1,6 +1,6 @@
 @font-face{
     font-family:'digital-clock-font';
-    src: url('./fonts/digital-7\ \(italic\).ttf');
+    src: url('./fonts/digital-7-webfont.woff');
 }
 
 html {
@@ -22,25 +22,26 @@ body {
 }
 
 #calculator {
+    width: 400px;
     border: 2px solid black;
-    min-height: auto;
-    min-width: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 35px;
     border-radius: 11px;
 }   
 
 #calculator .output-screen {
     background-color: rgb(117, 218, 117);   
-    padding: 20px 15px;
+    padding: 15px 15px;
     direction: rtl;
-}
+    align-self: stretch;
+    word-break: break-all;
+    min-height: 43px;   
+}   
 
 #calculator .screen-text {
-    display: inline-block;
     font-size: xxx-large;
-    font-weight: 500;
     font-family: 'digital-clock-font';
 }
 
@@ -75,8 +76,8 @@ body {
     grid-column-start: 1;
 }
 
-.second-column {
-    grid-column-start: 2;
+        .second-column {
+            grid-column-start: 2;
 }
 
 .third-column {
