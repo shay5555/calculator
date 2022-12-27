@@ -7,14 +7,19 @@ const clearButton = document.getElementById('clear');
 const getResultButton = document.getElementById('get-result');
 const signChangeButton = document.getElementById('sign-change');
 const decimalPointButton = document.getElementById('decimal-point');
+const printToScreenButton = document.querySelectorAll('.buttons .write-to-screen')
+const allButtons = document.querySelectorAll('.buttons button');
 
 
-numberButtons.forEach(e => {
+printToScreenButton.forEach(e => {
     e.addEventListener('click', function () {
-        console.log(this.textContent);
         updateScreenText(this.textContent);
     });
 }); 
+
+clearButton.addEventListener('click', function () {
+    outputScreenText.textContent = '';
+})
 
 function updateScreenText (newChar) {
     outputScreenText.textContent += `${newChar}`;
@@ -51,7 +56,6 @@ function operate (x, y, operator) {
             return null;
     }
 }
-
 
 
 console.log(numberButtons);
