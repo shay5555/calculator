@@ -34,7 +34,7 @@ body {
 #calculator .output-screen {
     background-color: rgb(117, 218, 117);   
     padding: 15px 15px;
-    direction: rtl;
+    text-align: right;
     align-self: stretch;
     word-break: break-all;
     min-height: 43px;   
