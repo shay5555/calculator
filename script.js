@@ -42,7 +42,7 @@ getResultButton.addEventListener('click', function () {
     currentOperator = outputScreenText.textContent.match(/(?<=\d)[+\-*/](?=\d)/)[0];
 
     outputScreenText.textContent = operate(firstNum, secondNum, currentOperator);
-    
+
     //result is now the first num of the next operation
     firstNum = parseFloat(outputScreenText.textContent);
     secondNum = null;
@@ -81,19 +81,35 @@ function updateScreenText (newChar) {
 }
 
 function operateAdd (x, y) {
-    return x+y;
+    if ((x+y) % 1 !== 0) {
+        return (x+y).toFixed(2);
+    } else {
+        return (x+y);
+    }
 }
 
 function operateSubtract (x, y) {
-    return x-y;
+    if ((x-y) % 1 !== 0) {
+        return (x-y).toFixed(2);
+    } else {
+        return (x-y);
+    }
 }
 
 function operateMultiply (x, y) {
-    return x*y;
+    if ((x*y) % 1 !== 0) {
+        return (x*y).toFixed(2);
+    } else {
+        return (x*y);
+    }
 }
 
 function operateDivide (x, y) {
-    return x/y;
+    if ((x/y) % 1 !== 0) {
+        return (x/y).toFixed(2);
+    } else {
+        return (x/y);
+    }
 }
 
 function operate (x, y, operator) {
