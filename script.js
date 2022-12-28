@@ -24,11 +24,11 @@ printToScreenButton.forEach(e => {
     });
 }); 
 
-//clear output text
+//clear output text and num values
 clearButton.addEventListener('click', function () { 
     outputScreenText.textContent = '';
     firstNum = null;
-    secondNum = null
+    secondNum = null;
 });
 
 getResultButton.addEventListener('click', function () {
@@ -37,18 +37,24 @@ getResultButton.addEventListener('click', function () {
     currentOperator = outputScreenText.textContent.match(/[+\-*/]/)[0];
     console.log(currentOperator);
     outputScreenText.textContent = operate(firstNum, secondNum, currentOperator);
+    firstNum = parseFloat(outputScreenText.textContent);
+    secondNum = null;
+    currentOperator = null;
 })
 
 function updateScreenText (newChar) {
     //don't allow user to input 2 non-number items in a  row
-    if (!parseFloat(lastChar) && !parseFloat(newChar)) {
+    if (!parseInt(lastChar) && parseInt(lastChar) !== 0 && !parseInt(newChar)) {
         return;
     }
 
     //executes when clicking an operator
     if (!parseInt(newChar) && newChar != 0 && newChar != '.') {
+        if (currentOperator === null && secondNum === null) {
+            currentOperator = newChar;
+        }
         //executes once after page load or after clearing calculator text
-        if (!firstNum) {
+        else if (!firstNum) {
             firstNum = parseFloat(outputScreenText.textContent.match(/\d+[.]\d+|\d+/));
             currentOperator = newChar;
         //executes on second operaor click & onwards
@@ -99,4 +105,4 @@ function operate (x, y, operator) {
     }
 }
 
-console.log();
+//console.log();
