@@ -32,11 +32,18 @@ clearButton.addEventListener('click', function () {
 });
 
 getResultButton.addEventListener('click', function () {
-    firstNum = parseFloat(outputScreenText.textContent.match(/\d+[.]\d+|\d+/));
+    //check if first num is negative and get it accordingly
+    if (checkIfNegative(outputScreenText.textContent)) {
+        firstNum = parseFloat(outputScreenText.textContent.match(/-\d+[.]\d+|-\d+/));
+    } else {
+        firstNum = parseFloat(outputScreenText.textContent.match(/\d+[.]\d+|\d+/));
+    }
     secondNum = parseFloat(outputScreenText.textContent.match(/(\d+[.]\d+|\d+)$/));
-    currentOperator = outputScreenText.textContent.match(/[+\-*/]/)[0];
-    console.log(currentOperator);
+    currentOperator = outputScreenText.textContent.match(/(?<=\d)[+\-*/](?=\d)/)[0];
+
     outputScreenText.textContent = operate(firstNum, secondNum, currentOperator);
+    
+    //result is now the first num of the next operation
     firstNum = parseFloat(outputScreenText.textContent);
     secondNum = null;
     currentOperator = null;
@@ -44,7 +51,7 @@ getResultButton.addEventListener('click', function () {
 
 function updateScreenText (newChar) {
     //don't allow user to input 2 non-number items in a  row
-    if (!parseInt(lastChar) && parseInt(lastChar) !== 0 && !parseInt(newChar)) {
+    if (!parseInt(lastChar) && parseInt(lastChar) !== 0 && !parseInt(newChar)) {   
         return;
     }
 
@@ -102,6 +109,14 @@ function operate (x, y, operator) {
         default:
             alert("Invalid operator");
             return null;    
+    }
+}
+
+function checkIfNegative (str) {
+    if (str.match(/(?<!\d)-/)) {
+        return true;
+    } else {
+        return false;
     }
 }
 
