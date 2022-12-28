@@ -29,6 +29,8 @@ clearButton.addEventListener('click', function () {
     outputScreenText.textContent = '';
     firstNum = null;
     secondNum = null;
+    currentOperator = null;
+    lastChar = null;
 });
 
 getResultButton.addEventListener('click', function () {
