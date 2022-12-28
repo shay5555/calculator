@@ -58,13 +58,21 @@ body {
     justify-content : stretch;
 }
 
-#calculator button {
+.buttons-container button {
     font-size: large;
     font-weight: bold;
     min-width: 100px;   
     min-height: 70px;
     border-radius: 13px;
     background-color: rgb(184, 184, 184);
+}
+
+#calculator .number {
+    background-color: rgb(223, 223, 223);
+}
+
+#get-result {
+    background-color: rgb(226, 121, 0);
 }
 
 #get-result {
